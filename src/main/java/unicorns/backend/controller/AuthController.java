@@ -1,5 +1,6 @@
 package unicorns.backend.controller;
 
+<<<<<<< HEAD
 import org.springframework.http.HttpStatus;
 import unicorns.backend.dto.request.LoginRequest;
 import unicorns.backend.dto.response.LoginResponse;
@@ -26,3 +27,7 @@ public class AuthController {
         }
     }
 }
+=======
+public class AuthController {
+}
+>>>>>>> 468afee069f3061401128ea0cfd0316406148cef

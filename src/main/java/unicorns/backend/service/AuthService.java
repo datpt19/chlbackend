@@ -1,5 +1,6 @@
 package unicorns.backend.service;
 
+<<<<<<< HEAD
 import unicorns.backend.dto.request.LoginRequest;
 import unicorns.backend.dto.response.LoginResponse;
 import unicorns.backend.util.JwtUtil;
@@ -36,4 +37,7 @@ public class AuthService {
             throw new RuntimeException("Xác thực không thành công!");
         }
     }
+=======
+public interface AuthService {
+>>>>>>> 468afee069f3061401128ea0cfd0316406148cef
 }

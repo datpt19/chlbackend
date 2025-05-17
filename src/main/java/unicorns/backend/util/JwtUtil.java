@@ -1,5 +1,6 @@
 package unicorns.backend.util;
 
+<<<<<<< HEAD
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -42,3 +43,7 @@ public class JwtUtil {
     }
 
 }
+=======
+public class JWT {
+}
+>>>>>>> 468afee069f3061401128ea0cfd0316406148cef
