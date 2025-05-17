@@ -1,6 +1,5 @@
 package unicorns.backend.config;
 
-<<<<<<< HEAD
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -52,7 +51,3 @@ public class SecurityConfig {
         return authenticationConfiguration.getAuthenticationManager();
     }
 }
-=======
-public class SecurityConfig {
-}
->>>>>>> 468afee069f3061401128ea0cfd0316406148cef
