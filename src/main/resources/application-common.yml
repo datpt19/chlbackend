@@ -1,5 +1,8 @@
 spring:
   datasource:
+#    url: jdbc:postgresql://localhost:5432/backendcvp
+#    username: myuser
+#    password: mypassword
     hikari:
       maximum-pool-size: 200
       minimum-idle: 2

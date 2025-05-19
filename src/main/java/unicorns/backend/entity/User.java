@@ -26,4 +26,15 @@ public class User extends BaseEntity {
     Boolean changeFirstPass;
     Integer countFail;
     Integer status;
+
+    public String getUsername() {
+        return username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
 }
+
+
