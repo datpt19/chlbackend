@@ -9,13 +9,19 @@ import jakarta.validation.Valid;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import unicorns.backend.dto.request.BaseRequest;
 import unicorns.backend.dto.request.CreateUserRequest;
 import unicorns.backend.dto.response.BaseResponse;
 import unicorns.backend.dto.response.CreateUserResponse;
+import unicorns.backend.security.UserDetailsImpl;
 import unicorns.backend.service.UserService;
 import unicorns.backend.util.Const;
+import unicorns.backend.dto.response.CurrentUserResponse;
+import unicorns.backend.entity.User;
+
+
 
 @RestController
 @RequestMapping(Const.PREFIX_USER_V1)
@@ -27,7 +33,7 @@ public class UserController {
 
     @Operation(summary = "get all user", description = "Get all user.")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "User created successfully")
+            @ApiResponse(responseCode = "200", description = "User list fetched successfully")
     })
     @GetMapping(value = "getAll")
     public BaseResponse<CreateUserResponse> getAllUsers() {
@@ -44,5 +50,34 @@ public class UserController {
     public BaseResponse<CreateUserResponse> createUser(@Valid @RequestBody BaseRequest<CreateUserRequest> request) {
         return userService.createUser(request);
     }
-}
 
+
+    @Operation(summary = "Get current user info", description = "Get info of user from JWT")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Fetched current user info")
+    })
+
+//    @GetMapping("me")
+//    public BaseResponse<?> getCurrentUser(@AuthenticationPrincipal UserDetailsImpl userDetails) {
+//        return BaseResponse.success(userDetails.getUser());
+//    }
+
+    @GetMapping("me")
+    public BaseResponse<CurrentUserResponse> getCurrentUser(
+            @AuthenticationPrincipal UserDetailsImpl userDetails) {
+
+        // 1. Lấy entity User từ UserDetailsImpl
+        User user = userDetails.getUser();
+
+        // 2. Map sang DTO
+        CurrentUserResponse dto = new CurrentUserResponse(
+                user.getUsername(),
+                user.getEmail(),
+                user.getName(),
+                user.getDateOfBirth()
+        );
+
+        // 3. Trả về success kèm payload là DTO
+        return BaseResponse.success(dto);
+    }
+}
