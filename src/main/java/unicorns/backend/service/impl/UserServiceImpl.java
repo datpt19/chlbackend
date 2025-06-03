@@ -10,8 +10,10 @@ import unicorns.backend.dto.request.BaseRequest;
 import unicorns.backend.dto.request.CreateUserRequest;
 import unicorns.backend.dto.response.BaseResponse;
 import unicorns.backend.dto.response.CreateUserResponse;
+import unicorns.backend.dto.response.CurrentUserResponse;
 import unicorns.backend.entity.User;
 import unicorns.backend.repository.UserRepository;
+import unicorns.backend.security.UserDetailsImpl;
 import unicorns.backend.service.UserService;
 import unicorns.backend.util.ApplicationCode;
 import unicorns.backend.util.ApplicationException;
@@ -67,4 +69,19 @@ public class UserServiceImpl implements UserService {
         baseResponse.setWsResponse(createUserResponseList);
         return baseResponse;
     }
+
+    @Override
+    public BaseResponse<CurrentUserResponse> getCurrentUserInfo(UserDetailsImpl userDetails) {
+        User user = userDetails.getUser();
+
+        CurrentUserResponse dto = new CurrentUserResponse(
+                user.getUsername(),
+                user.getEmail(),
+                user.getName(),
+                user.getDateOfBirth()
+        );
+
+        return BaseResponse.success(dto);
+    }
+
 }

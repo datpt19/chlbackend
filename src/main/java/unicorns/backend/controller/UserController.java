@@ -62,22 +62,23 @@ public class UserController {
 //        return BaseResponse.success(userDetails.getUser());
 //    }
 
+//    @GetMapping("me")
+//    public BaseResponse<CurrentUserResponse> getCurrentUser(
+//            @AuthenticationPrincipal UserDetailsImpl userDetails) {
+//        User user = userDetails.getUser();
+//        CurrentUserResponse dto = new CurrentUserResponse(
+//                user.getUsername(),
+//                user.getEmail(),
+//                user.getName(),
+//                user.getDateOfBirth()
+//        );
+//        return BaseResponse.success(dto);
+//    }
+
     @GetMapping("me")
     public BaseResponse<CurrentUserResponse> getCurrentUser(
             @AuthenticationPrincipal UserDetailsImpl userDetails) {
-
-        // 1. Lấy entity User từ UserDetailsImpl
-        User user = userDetails.getUser();
-
-        // 2. Map sang DTO
-        CurrentUserResponse dto = new CurrentUserResponse(
-                user.getUsername(),
-                user.getEmail(),
-                user.getName(),
-                user.getDateOfBirth()
-        );
-
-        // 3. Trả về success kèm payload là DTO
-        return BaseResponse.success(dto);
+        return userService.getCurrentUserInfo(userDetails);
     }
+
 }
